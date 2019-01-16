@@ -1,5 +1,7 @@
 import * as React from "react"
 
+import Insert from 'src/components/insert'
+
 export default class List extends React.Component <{}> {
     constructor(props: {}){
       super(props)
@@ -8,7 +10,7 @@ export default class List extends React.Component <{}> {
     public render() {
       return (
         <div>
-            1234 list
+            <Insert />
         </div>
       )
     }
