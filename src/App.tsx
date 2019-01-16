@@ -1,9 +1,10 @@
 import * as React from 'react'
+import 'antd/dist/antd.css'
 
 import List from '../src/containers/list'
-import './App.css';
+import './App.css'
 
-class App extends React.Component {
+export default class App extends React.Component {
   public render() {
     return (
       <div className="App">
@@ -12,5 +13,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
