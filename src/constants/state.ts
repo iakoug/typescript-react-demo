@@ -3,11 +3,3 @@ export interface ITask {
   status: number
   id: number
 }
-
-export interface IState {
-  list: ITask[]
-  lists: ITask[]
-  finished: number
-  updateTask: ITask[]
-  style: boolean
-}

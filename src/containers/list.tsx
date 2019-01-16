@@ -4,7 +4,16 @@ import { List } from 'antd'
 
 import Insert from 'src/components/insert'
 
-import { ITask, IState } from 'src/constants/state'
+import { ITask } from 'src/constants/state'
+
+interface IState {
+  list: ITask[]
+  lists: ITask[]
+  finished: number
+  updateTask: ITask[]
+  style: boolean
+}
+
 
 export default class ListCon extends React.Component <{}, IState> {
     constructor(props: {}, state: IState){
@@ -44,7 +53,7 @@ export default class ListCon extends React.Component <{}, IState> {
       const Item = (item: ITask) => (
         <List.Item>
             <List.Item.Meta
-              title={<a href="https://ant.design">{item.name}</a>}
+              title={<a href="#item">{item.name}</a>}
             />
         </List.Item>
       )
