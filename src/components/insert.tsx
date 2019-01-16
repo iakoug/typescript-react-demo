@@ -15,7 +15,10 @@ interface State {
 export default class Insert extends React.Component<IProps, State> {
 	constructor (props: IProps, state: State) {
     super(props, state)
-    
+
+    this.state = {
+      val: ''
+    }
   }
   
   public insert = (): void => {
