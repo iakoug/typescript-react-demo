@@ -56,20 +56,31 @@ export default class ListCon extends React.Component <{}, IState> {
       })
     }
 
-    public openModal = (model: {}): void => {
-      console.log(model)
+    public openModal = (model: ITask): void => {
       this.setState({
         visible: true,
-        model
+        model: Object.assign({}, model)
       })
     }
 
-    public handleOk = (): void => {
-      this.setState({ loading: true })
+    public handleOk = (model: ITask): void => {
+      console.log(model, '-------')
+      const list: ITask[] = this.state.list
+
+      const i: number = list.findIndex(v => v.id === model.id)
+
+      list[i] = Object.assign({}, model)
+
+      this.setState({
+        loading: true,
+        list
+      })
 
       setTimeout(() => {
         this.setState({ loading: false, visible: false })
       }, 500)
+
+
     }
   
     public handleCancel = (): void => {
@@ -84,9 +95,6 @@ export default class ListCon extends React.Component <{}, IState> {
     }
 
     public render() {
-      const del: any = (id: number) => (): void => this.delete(id)
-      const open: any = (model: {}) => (): void => this.openModal(model)
-
       const Item = (item: ITask) => (
         <List.Item>
             <List.Item.Meta
@@ -94,14 +102,14 @@ export default class ListCon extends React.Component <{}, IState> {
             />
             <Button
               type="danger"
-              onClick={del(item.id)}
+              onClick={this.delete.bind(this, item.id)}
             >
               delete
             </Button>
             <Button
               className="update"
               type="primary"
-              onClick={open(item)}
+              onClick={this.openModal.bind(this, item)}
             >
               update
             </Button>
@@ -123,7 +131,7 @@ export default class ListCon extends React.Component <{}, IState> {
             <Modal
               visible={visible}
               title="modify current item"
-              onOk={this.handleOk}
+              onOk={this.handleOk.bind(this, model)}
               onCancel={this.handleCancel}
               footer={[
                 <Button
@@ -136,7 +144,7 @@ export default class ListCon extends React.Component <{}, IState> {
                   key="submit"
                   type="primary"
                   loading={loading}
-                  onClick={this.handleOk}
+                  onClick={this.handleOk.bind(this, model)}
                 >
                   modify
                 </Button>,
