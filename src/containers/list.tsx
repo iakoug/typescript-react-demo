@@ -6,6 +6,8 @@ import Insert from 'src/components/insert'
 
 import { ITask } from 'src/constants/state'
 
+import './list.scss'
+
 interface IState {
   list: ITask[]
   lists: ITask[]
