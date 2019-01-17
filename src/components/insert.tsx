@@ -6,7 +6,6 @@ import { ITask } from 'src/constants/state'
 const Search = Input.Search
 
 interface IProps {
-  lens: number,
   insert: (item: ITask) => void
 }
 
@@ -29,8 +28,8 @@ export default class Insert extends React.Component<IProps, State> {
   public insert = (val: string): void => {
     if (val) {
       this.props.insert({
-        id: this.props.lens,
-        name: val,
+        id: Date.now(),
+        text: val,
         status: 0
       })
 
