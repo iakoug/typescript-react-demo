@@ -3,13 +3,16 @@ import * as React from "react"
 import { List, Button, Modal, Input } from 'antd'
 
 import Insert from 'src/components/insert'
+import Search from 'src/components/search'
 
-import { ITask } from 'src/constants/state'
+import { ITask } from 'src/constants/task'
 
 import './list.scss'
 
 interface IState {
   list: ITask[]
+  originList: ITask[]
+  currentList: ITask[]
   finished: number
   model: ITask
   visible: boolean
@@ -22,26 +25,48 @@ export default class ListCon extends React.Component <{}, IState> {
 
       this.state = {
         finished: 0,
-        list: [{
-            text: '事项1',
-            status: 0,
-            id: Date.now(),
-        }],
+        list: [],
+        originList: [],
+        currentList: [],
         model: {},
         visible: false,
         loading: false
       }
     }
 
-    public insert = (item: ITask): void => {
-      const allTask: ITask[] = this.state.list
+    public search = (val: string): void => {
+      console.log(val, this.state.originList.length)
+      if (!this.state.originList.length) return void 0
+      console.log(val)
+    
+      if (val) {
+        const list: any = this.state.originList.filter((v: ITask | any) => v.text.includes(val))
 
-      const list: ITask[] = allTask
+        this.setState({
+          list
+        })
+      } else {
+        console.log(this.state.originList, 'this.state.originList')
+        this.setState({
+          list: this.state.originList
+        })
+      }
+    }
+
+    public reset = (): void => {
+      this.setState({
+        list: this.state.originList
+      })
+    }
+
+    public insert = (item: ITask): void => {
+      const list: ITask[] = this.state.list
 
       list.push(item)
 
       this.setState({
-          list
+        list,
+        originList: list
       })
     }
 
@@ -119,7 +144,11 @@ export default class ListCon extends React.Component <{}, IState> {
       return (
         <div>
             <Insert
-              insert={this.insert} 
+              insert={ this.insert } 
+            />
+            <Search
+              search={ this.search } 
+              reset={ this.reset }
             />
             <List
                 itemLayout="horizontal"

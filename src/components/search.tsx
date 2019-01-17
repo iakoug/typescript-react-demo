@@ -1,42 +1,32 @@
-import { Input} from 'antd'
+import { Input, Button } from 'antd'
 import * as React from 'react'
-
-import { ITask } from 'src/constants/task'
 
 const Search = Input.Search
 
 interface IProps {
-  insert: (item: ITask) => void
+  search: (val: string) => void
+  reset(): void
 }
 
 interface State {
   val: string
 }
 
-export default class Insert extends React.Component<IProps, State> {
-  // public input: any
+export default class SearchCom extends React.Component<IProps, State> {
 	constructor (props: IProps, state: State) {
     super(props, state)
-
-    // this.input = React.createRef()
 
     this.state = {
       val: ''
     }
   }
   
-  public insert = (val: string): void => {
-    if (val) {
-      this.props.insert({
-        id: Date.now(),
-        text: val,
-        status: 0
-      })
+  public search = (val: string): void => {
+    if (val) this.props.search(val)
+  }
 
-      this.setState({
-        val: ''
-      })
-    }
+  public reset = (): void => {
+    this.props.reset()
   }
 
   public change = (e: any) :void => {
@@ -47,19 +37,21 @@ export default class Insert extends React.Component<IProps, State> {
 
 	public render () {
 		return (
-			<div className="dialog">
+			<div>
 				<div>
-					<h3>添加待办事项</h3>
+					<h3>搜索待办事项</h3>
           <Search 
             placeholder="input text"
-            onSearch={this.insert}
+            onSearch={this.search}
             value={this.state.val}
             onChange={this.change}
             style={{ width: 400 }}
-            enterButton="Insert"
+            enterButton="Search"
             size="large"
-            // ref={this.input}
           />
+          <Button type="primary" onClick={ this.reset }>
+              reset
+          </Button>
 				</div>
 			</div>
 		)
