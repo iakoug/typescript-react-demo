@@ -35,9 +35,7 @@ export default class ListCon extends React.Component <{}, IState> {
     }
 
     public search = (val: string): void => {
-      console.log(val, this.state.originList.length)
       if (!this.state.originList.length) return void 0
-      console.log(val)
     
       if (val) {
         const list: any = this.state.originList.filter((v: ITask | any) => v.text.includes(val))
@@ -46,7 +44,6 @@ export default class ListCon extends React.Component <{}, IState> {
           list
         })
       } else {
-        console.log(this.state.originList, 'this.state.originList')
         this.setState({
           list: this.state.originList
         })
