@@ -89,14 +89,18 @@ export default class ListCon extends React.Component <{}, IState> {
 
     public handleOk = (model: ITask): void => {
       const list: ITask[] = this.state.list
+      const originList: ITask[] = this.state.originList
 
       const i: number = list.findIndex(v => v.id === model.id)
+      const oI: number = originList.findIndex(v => v.id === model.id)
 
       list[i] = Object.assign({}, model)
+      originList[oI] = Object.assign({}, model)
 
       this.setState({
         loading: true,
-        list
+        list,
+        originList
       })
 
       setTimeout(() => {
