@@ -15,11 +15,11 @@ interface State {
 }
 
 export default class Insert extends React.Component<IProps, State> {
-  public input: any
+  // public input: any
 	constructor (props: IProps, state: State) {
     super(props, state)
 
-    this.input = React.createRef()
+    // this.input = React.createRef()
 
     this.state = {
       val: ''
@@ -27,10 +27,6 @@ export default class Insert extends React.Component<IProps, State> {
   }
   
   public insert = (val: string): void => {
-    // const val = this.state.val
-
-    console.log(this.input)
-
     if (val) {
       this.props.insert({
         id: this.props.lens,
@@ -63,7 +59,7 @@ export default class Insert extends React.Component<IProps, State> {
             style={{ width: 400 }}
             enterButton="Insert"
             size="large"
-            ref={this.input}
+            // ref={this.input}
           />
 				</div>
 			</div>
