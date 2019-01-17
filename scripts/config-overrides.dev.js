@@ -2,9 +2,10 @@ const path = require('path');
 
 module.exports = function(config) {
   // 使用你自己的 ESLint 
-  // let eslintLoader = config.module.rules[0];
-  console.log(config, '111111111111');
-  // eslintLoader.use[0].options.useEslintrc = true;
+  let eslintLoader = config.module.rules[0];
+  if (eslintLoader.use) {
+    eslintLoader.use[0].options.useEslintrc = true;
+  }
 
   // Add the SASS loader second-to-last
   // (last one must remain as the "file-loader")

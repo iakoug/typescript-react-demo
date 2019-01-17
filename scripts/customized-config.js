@@ -15,7 +15,7 @@ var proxyquire = require('proxyquire');
 switch(process.argv[2]) {
   // The "start" script is run during development mode
   case 'start':
-    rewireModule('react-scripts-ts/scripts/start.js', loadCustomizer('../config-overrides.dev'));
+    rewireModule('react-scripts-ts/scripts/start.js', loadCustomizer('./config-overrides.dev'));
     break;
   // The "build" script is run to produce a production bundle
   case 'build':
