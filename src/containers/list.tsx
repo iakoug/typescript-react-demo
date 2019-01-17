@@ -16,7 +16,6 @@ interface IState {
   loading: boolean
 }
 
-
 export default class ListCon extends React.Component <{}, IState> {
     constructor(props: {}, state: IState){
       super(props, state)
@@ -64,7 +63,6 @@ export default class ListCon extends React.Component <{}, IState> {
     }
 
     public handleOk = (model: ITask): void => {
-      console.log(model, '-------')
       const list: ITask[] = this.state.list
 
       const i: number = list.findIndex(v => v.id === model.id)
